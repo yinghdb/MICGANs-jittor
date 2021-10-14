@@ -63,15 +63,12 @@ def main():
     if not path.exists(checkpoint_dir):
         os.makedirs(checkpoint_dir)
 
-    train_loader = get_dataset(
-        data_dir=config['data']['train_dir'], size=config['data']['img_size']) \
+    train_loader = get_dataset(data_dir=config['data']['train_dir'], size=config['data']['img_size']) \
         .set_attrs(batch_size=batch_size, shuffle=True, drop_last=True)
-    eval_loader = get_dataset(
-        data_dir=config['data']['train_dir'], size=config['data']['img_size']) \
-        .set_attrs(batch_size=1, shuffle=False, drop_last=False)
+    eval_loader = get_dataset(data_dir=config['data']['train_dir'], size=config['data']['img_size']) \
+        .set_attrs(batch_size=batch_size, shuffle=False, drop_last=False)
     
-    image_num = len(eval_loader)
-    eval_loader.set_attrs(batch_size=batch_size)
+    image_num = eval_loader.dataset.total_len
 
     # collect ground-truth labels for evaluation
     data_label_ims = np.zeros(image_num, dtype=int)

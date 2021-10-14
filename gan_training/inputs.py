@@ -11,14 +11,12 @@ class IndexedDataset(Dataset):
     def __init__(self, dataset):
         super().__init__()
         self.dataset = dataset
+        self.total_len = self.dataset.total_len
 
     def __getitem__(self, index):
         img, label = self.dataset[index]
 
         return img, label, index
-
-    def __len__(self):
-        return len(self.dataset)
 
 def get_dataset(data_dir, size=64):
                 
