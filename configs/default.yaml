@@ -1,0 +1,40 @@
+data:
+  type: mnist
+  train_dir: data/MNIST/
+  img_size: 32
+  nlabels: 10
+condition:
+  num_k: 15
+generator:
+  nc: 1
+discriminator:
+  nc: 1
+encoder:
+  nc: 1
+multi_gauss:
+  embed_dim: 15
+  fix_mean: False
+  sigma_scalor: 1.1
+  dim_reduce: False
+  reduce_ratio: 0.95
+z_dist:
+  type: gauss
+  dim: 256
+training:
+  optimizer: adam
+  lr_g: 0.0001
+  lr_d: 0.0001
+  lr_q: 0.0001
+  beta1: 0.0
+  beta2: 0.99
+  batch_size: 64
+  out_dir: output/mnist/
+  ntest: 128
+initialization:
+  n_image: 1200000
+acrp:
+  n_epoch: 10
+  n_q: 64000
+  n_gd: 600000
+  cluster_epoch_1: 3
+  cluster_epoch_2: 3
